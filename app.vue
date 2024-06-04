@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DifyResponse } from "./interface";
+import { marked } from "marked";
 
 const article = ref("");
 const res = ref("");
@@ -12,13 +13,13 @@ const handleSubmit = async () => {
     body: { article: article.value },
   });
 
-  res.value = response.answer;
+  res.value = await marked(response.answer);
   isLoading.value = false;
 };
 
 useHead({
   title: "Traducir Artículos Científicos | Daniel Colmenares",
-})
+});
 </script>
 
 <template>
@@ -28,11 +29,21 @@ useHead({
     <div class="w-1/4">
       <UCard as="article">
         <template #header>
-          <h2>Traducir Artículos Científicos</h2>
+          <h2 class="text-xl font-bold text-slate-700">
+            Traductor de Artículos Científicos
+          </h2>
         </template>
 
-        <UFormGroup class="w-full" label="Agrega aquí tu texto a traducir">
-          <UTextarea :disabled="isLoading"  textareaClass="w-full h-96" v-model="article" />
+        <UFormGroup
+          class="w-full scroll"
+          label="Agrega aquí tu texto a traducir"
+        >
+          <UTextarea
+            :disabled="isLoading"
+            textareaClass="w-full h-96 scroll"
+            v-model="article"
+            placeholder="Artículo"
+          />
         </UFormGroup>
 
         <div class="flex justify-end w-full mt-4">
@@ -42,12 +53,17 @@ useHead({
     </div>
 
     <div class="relative w-3/4 h-full">
-      <UCard as="article" class="absolute inset-0 overflow-x-hidden">
+      <UCard
+        as="article"
+        class="absolute inset-0 overflow-x-hidden overflow-y-auto scroll"
+      >
         <template #header>
-          <h2>Traducción</h2>
+          <h2 class="text-xl font-bold text-slate-700">
+            {{ isLoading ? "Cargando respuesta..." : "Resultado" }}
+          </h2>
         </template>
 
-        <div v-if="isLoading" class="flex flex-col gap-4">
+        <article v-if="isLoading" class="flex flex-col gap-4">
           <USkeleton class="w-full h-4" />
           <USkeleton class="w-full h-4" />
           <USkeleton class="w-full h-4" />
@@ -59,10 +75,45 @@ useHead({
           <USkeleton class="w-full h-4" />
           <USkeleton class="w-full h-4" />
           <USkeleton class="w-1/2 h-4" />
-        </div>
+        </article>
 
-        <pre v-else class="inline-block overflow-y-auto" style="white-space: pre-wrap;">{{ res }}</pre>
+        <article
+          v-else
+          class="prose"
+          style="max-width: 100%"
+          v-html="res"
+        ></article>
       </UCard>
     </div>
   </section>
 </template>
+
+<style scoped>
+/* Custom scrollbar styles */
+textarea::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #16a34a;
+  border-radius: 0.25rem;
+}
+
+textarea::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #16a34a;
+  border-radius: 0.25rem;
+}
+
+.scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+</style>
