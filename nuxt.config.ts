@@ -14,5 +14,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     difyApiKey: process.env.DIFY_API_KEY,
     difyBaseUrl: process.env.DIFY_BASE_URL,
+    difyProjectName: process.env.DIFY_PROJECT_NAME,
   },
 });
