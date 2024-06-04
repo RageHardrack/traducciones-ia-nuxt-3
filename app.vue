@@ -15,6 +15,10 @@ const handleSubmit = async () => {
   res.value = response.answer;
   isLoading.value = false;
 };
+
+useHead({
+  title: "Traducir Artículos Científicos | Daniel Colmenares",
+})
 </script>
 
 <template>
@@ -28,7 +32,7 @@ const handleSubmit = async () => {
         </template>
 
         <UFormGroup class="w-full" label="Agrega aquí tu texto a traducir">
-          <UTextarea textareaClass="w-full h-96" v-model="article" />
+          <UTextarea :disabled="isLoading"  textareaClass="w-full h-96" v-model="article" />
         </UFormGroup>
 
         <div class="flex justify-end w-full mt-4">
@@ -43,7 +47,21 @@ const handleSubmit = async () => {
           <h2>Traducción</h2>
         </template>
 
-        <pre class="overflow-y-auto">{{ res }}</pre>
+        <div v-if="isLoading" class="flex flex-col gap-4">
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-full h-4" />
+          <USkeleton class="w-1/2 h-4" />
+        </div>
+
+        <pre v-else class="inline-block overflow-y-auto" style="white-space: pre-wrap;">{{ res }}</pre>
       </UCard>
     </div>
   </section>
