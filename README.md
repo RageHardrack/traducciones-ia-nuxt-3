@@ -1,75 +1,45 @@
-# Nuxt 3 Minimal Starter
+# Traductor de artículos científicos usando IA a través de la API de Dify
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Stack
+
+- pnpm
+- marked
+- Nuxt 3
+  - Nuxt UI
+  - TailwindCSS
+  - Nuxt Icons
+
+## Variables de Entorno
+
+| Nombre              | Descripción                                                                              | Requerido |
+| ------------------- | ---------------------------------------------------------------------------------------- | --------- |
+| `DIFY_API_KEY`      | API Key para acceder a la API de Dify                                                    | Si        |
+| `DIFY_BASE_URL`     | URL Base para conectarse vía http a la API de Dify                                       | Si        |
+| `DIFY_PROJECT_NAME` | Nombre del proyecto en el cual se ha configurado el LLM, la variables a usar y el modelo | Si        |
 
 ## Setup
 
-Make sure to install the dependencies:
+Instalar las dependencias
 
 ```bash
-# npm
-npm install
-
 # pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Levantar servidor de desarrollo en: `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
 # pnpm
 pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
 
-Build the application for production:
+Construir la aplicación para Producción:
 
 ```bash
-# npm
-npm run build
-
 # pnpm
 pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
