@@ -10,6 +10,7 @@ const handleSubmit = async () => {
   isLoading.value = true;
   const response = await $fetch<DifyResponse>("/api/traducir", {
     method: "POST",
+    timeout: 60000,
     body: { article: article.value },
   });
 
