@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
     const response = await $fetch<DifyResponse>("/completion-messages", {
       method: "POST",
       baseURL: difyBaseUrl,
+      timeout: 60000,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${difyApiKey}`,
