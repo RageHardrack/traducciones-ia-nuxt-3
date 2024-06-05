@@ -29,9 +29,9 @@ useHead({
     <div class="w-1/4">
       <UCard as="article">
         <template #header>
-          <h2 class="text-xl font-bold text-slate-700">
+          <h1 class="text-xl font-bold dark:text-white text-slate-700">
             Traductor de Artículos Científicos
-          </h2>
+          </h1>
         </template>
 
         <UFormGroup
@@ -58,7 +58,7 @@ useHead({
         class="absolute inset-0 overflow-x-hidden overflow-y-auto scroll"
       >
         <template #header>
-          <h2 class="text-xl font-bold text-slate-700">
+          <h2 class="text-xl font-bold dark:text-white text-slate-700">
             {{ isLoading ? "Cargando respuesta..." : "Resultado" }}
           </h2>
         </template>
